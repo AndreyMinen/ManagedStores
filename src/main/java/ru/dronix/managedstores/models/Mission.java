@@ -1,5 +1,8 @@
 package ru.dronix.managedstores.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,6 +26,9 @@ public class Mission {
     @Column(name = "descr")
     private String descr;
 
-
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store_id;
 
 }

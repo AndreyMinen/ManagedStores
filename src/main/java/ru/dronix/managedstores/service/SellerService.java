@@ -1,24 +1,16 @@
 package ru.dronix.managedstores.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ru.dronix.managedstores.dao.SellerDao;
 import ru.dronix.managedstores.models.Seller;
 
 import java.util.List;
 
 /**
- * Created by ADMIN on 09.03.2017.
+ * Created by ADMIN on 10.03.2017.
  */
-@Service
-public class SellerService {
+public interface SellerService {
 
-    @Autowired
-    private SellerDao sellerDao;
+    List<Seller> findAll();
 
-
-    public List<Seller> findAll(){
-        return sellerDao.findAll();
-    }
+    Seller getOne(Long id);
 
 }

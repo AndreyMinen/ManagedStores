@@ -1,10 +1,13 @@
 package ru.dronix.managedstores.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,7 +27,8 @@ public class City {
     @Column(name = "name")
     private String name;
 
-//    @OneToMany(mappedBy = "city_id")
-//    private Set<Store> stores;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "city_id")
+    private List<Store> stores=new ArrayList<Store>();
 
 }
