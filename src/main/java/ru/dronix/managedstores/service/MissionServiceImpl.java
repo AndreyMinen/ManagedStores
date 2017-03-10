@@ -28,4 +28,22 @@ public class MissionServiceImpl implements MissionService {
     public Mission getOne(Long id) {
         return missionDao.getOne(id);
     }
+
+    @Override
+    @Transactional
+    public void create(Mission mission) {
+        missionDao.saveAndFlush(mission);
+    }
+
+    @Override
+    @Transactional
+    public void update(Mission mission) {
+        missionDao.saveAndFlush(mission);
+    }
+
+    @Override
+    @Transactional
+    public void remove(Mission mission) {
+        missionDao.delete(mission);
+    }
 }

@@ -13,4 +13,10 @@ public interface MissionService {
 
     Mission getOne(Long id);
 
+    void create(Mission mission);
+
+    void update(Mission mission);
+
+    void remove(Mission mission);
+
 }

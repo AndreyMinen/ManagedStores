@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "mission")
 @Data
+@NoArgsConstructor
 public class Mission {
 
     @Id
