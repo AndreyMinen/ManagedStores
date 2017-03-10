@@ -29,4 +29,28 @@ public class CityServiceImpl implements CityService {
     public City getOne(Long id) {
         return cityDao.getOne(id);
     }
+
+    @Override
+    @Transactional
+    public void create(City city) {
+        cityDao.saveAndFlush(city);
+    }
+
+    @Override
+    @Transactional
+    public void update(City city) {
+        cityDao.saveAndFlush(city);
+    }
+
+    @Override
+    @Transactional
+    public void remove(City city) {
+        cityDao.delete(city);
+    }
+
+    @Override
+    @Transactional
+    public City findByName(String name) {
+        return cityDao.findByName(name);
+    }
 }

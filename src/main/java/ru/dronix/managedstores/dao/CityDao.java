@@ -17,5 +17,6 @@ public interface CityDao extends JpaRepository<City,Long> {
 
     City getOne(Long id);
 
+    City findByName(String name);
 
 }

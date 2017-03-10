@@ -13,4 +13,12 @@ public interface CityService {
 
     City getOne(Long id);
 
+    void create(City city);
+
+    void update(City city);
+
+    void remove(City city);
+
+    City findByName(String name);
+
 }
