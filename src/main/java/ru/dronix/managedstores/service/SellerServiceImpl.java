@@ -29,4 +29,28 @@ public class SellerServiceImpl implements SellerService {
         return sellerDao.getOne(id);
     }
 
+    @Override
+    @Transactional
+    public List<Seller> findByName(String name) {
+        return sellerDao.findByName(name);
+    }
+
+    @Override
+    @Transactional
+    public void create(Seller seller) {
+        sellerDao.saveAndFlush(seller);
+    }
+
+    @Override
+    @Transactional
+    public void update(Seller seller) {
+        sellerDao.saveAndFlush(seller);
+    }
+
+    @Override
+    @Transactional
+    public void remove(Seller seller) {
+        sellerDao.delete(seller);
+    }
+
 }

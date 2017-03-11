@@ -1,5 +1,7 @@
 package ru.dronix.managedstores.service;
 
+import ru.dronix.managedstores.models.City;
+import ru.dronix.managedstores.models.Seller;
 import ru.dronix.managedstores.models.Store;
 
 import java.util.List;
@@ -12,5 +14,13 @@ public interface StoreService {
     List<Store> findAll();
 
     Store getOne(Long id);
+
+    void create(Store store);
+
+    void update(Store store);
+
+    void remove(Store store);
+
+    List<Store> findByCity_id(Long id);
 
 }

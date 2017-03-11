@@ -11,6 +11,7 @@ import java.util.List;
  * Created by ADMIN on 10.03.2017.
  */
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/city")
 public class CityController {
 

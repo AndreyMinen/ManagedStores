@@ -1,10 +1,7 @@
 package ru.dronix.managedstores.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.dronix.managedstores.models.Mission;
 import ru.dronix.managedstores.models.Store;
 import ru.dronix.managedstores.service.MissionService;
@@ -16,6 +13,7 @@ import java.util.List;
  * Created by ADMIN on 10.03.2017.
  */
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/mission")
 public class MissionController {
 

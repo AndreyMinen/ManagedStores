@@ -1,8 +1,10 @@
 package ru.dronix.managedstores.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import java.util.Set;
 @Entity
 @Table(name = "store")
 @Data
+@NoArgsConstructor
 public class Store {
 
     @Id
@@ -26,14 +29,17 @@ public class Store {
     @Column(name = "name")
     private String name;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "city_id")
-    private City city_id;
+    private City city;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "store_id",cascade= CascadeType.ALL, orphanRemoval=true)
-    private List<Mission> missions=new ArrayList<Mission>();
+    @JsonIgnoreProperties("store_id")
+    @OneToMany(mappedBy = "store_id",cascade= CascadeType.ALL)
+    private List<Mission> missions;
+
+    @JsonIgnoreProperties("store_id")
+    @OneToMany(mappedBy = "store_id")
+    private List<Seller> sellers;
 
 
 }

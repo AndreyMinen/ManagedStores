@@ -2,6 +2,7 @@ package ru.dronix.managedstores.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "seller")
 @Data
+@NoArgsConstructor
 public class Seller {
 
     @Id
