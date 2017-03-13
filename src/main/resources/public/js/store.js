@@ -47,26 +47,7 @@ app.controller("bodyCtrl",function ($scope,$http) {
         location.reload();
     };
 
-    $scope.search=function (seller) {
 
-        var query='';
-        if(seller.name!=''){
-            query='http://localhost:8080/store/filter?name='+seller.name;
-        }
-        if(seller.city!=null){
-            query='http://localhost:8080/store/filter?city_id='+seller.city;
-        }
-        if((seller.city!=null) && (seller.name!='')){
-            query='http://localhost:8080/store/filter?name='+seller.name+"&city_id="+seller.city;
-        }
-
-        for(var i=0;listStores<listStores.length;i++){
-            if(listStores[i].indexOf(seller.name)!=-1){
-                alert(listStores[i]);
-            }
-        }
-
-    };
 
 });
 

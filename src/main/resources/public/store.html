@@ -22,9 +22,8 @@
         <div id="block_serch">
             <form>
                 Поиск: <input ng-model="seller.name" placeholder="Сотрудник" type="text" name="city">
-                <select ng-model="seller.city">
-                    <option selected></option>
-                    <option ng-repeat="city in listCities" value="{{city.id}}">{{city.name}}</option>
+                <select ng-model="city" ng-options="city.name for city in listCities">
+                    <option></option>
                 </select>
                 <input type="button" ng-click="search(seller)" value="Поиск">
             </form>
@@ -39,7 +38,7 @@
                     <th><b>Задания</b></th>
                     <th><b>Действия</b></th>
                 </tr>
-                <tr ng-repeat="store in listStores | filter: seller.name">
+                <tr ng-repeat="store in listStores | filter: city.name | filter: seller.name">
                     <td><input type="checkbox" name="store" value="{{store.id}}"></td>
                     <td>{{store.id}}</td>
                     <td>{{store.name}}</td>
