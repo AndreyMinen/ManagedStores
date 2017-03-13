@@ -1,0 +1,57 @@
+#block_link{
+    padding-left: 400px;
+    font:15px sans-serif;
+    color: blue;
+}
+#block_link ul li{
+    float: left;
+    padding-left: 15px;
+    list-style: none;
+}
+
+
+
+#block_link ul li span:hover{
+    color: red;
+    cursor: pointer;
+}
+
+#block_table{
+    padding-top:50px;
+    padding-left: 150px;
+}
+
+#block_table table{
+    width: 1000px;
+    height: auto;
+}
+
+.link{
+    color: blue;
+    cursor: pointer;
+}
+
+.link:hover{
+    color: red;
+}
+
+#block_serch{
+    padding-top:50px;
+    padding-left: 380px;
+}
+
+#block_form{
+    padding-left: 150px;
+}
+
+#block_form ul{
+    list-style: none;
+}
+
+#block_form ul li{
+    padding-top: 15px;
+}
+
+.active{
+    color:red;
+}

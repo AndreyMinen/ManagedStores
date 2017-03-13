@@ -21,6 +21,6 @@ public interface StoreService {
 
     void remove(Store store);
 
-    List<Store> findByCity_id(Long id);
+    List<Store> findByCityId(Long id);
 
 }

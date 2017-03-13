@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/styles.css">
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/store.js"></script>
+    <title>Управление магазинами</title>
+</head>
+<body ng-app="application">
+
+    <div id="block_body" ng-controller="bodyCtrl">
+        <div id="block_link">
+            <ul>
+                <li><span class="active">Магазины</span></li>
+                <li><a href="#">Города</a></li>
+                <li><a href="#">Сотрудники</a></li>
+                <li><a href="#">Задания</a></li>
+            </ul>
+        </div>
+        <div id="block_serch">
+            <form>
+                Поиск: <input ng-model="seller.name" placeholder="Сотрудник" type="text" name="city">
+                <select ng-model="seller.city">
+                    <option selected></option>
+                    <option ng-repeat="city in listCities" value="{{city.id}}">{{city.name}}</option>
+                </select>
+                <input type="button" ng-click="search(seller)" value="Поиск">
+            </form>
+        </div>
+        <div id="block_table">
+            <table border="1">
+                <tr>
+                    <th><b>Выбор</b></th>
+                    <th><b>ID</b></th>
+                    <th><b>Название</b></th>
+                    <th><b>Город</b></th>
+                    <th><b>Задания</b></th>
+                    <th><b>Действия</b></th>
+                </tr>
+                <tr ng-repeat="store in listStores | filter: seller.name">
+                    <td><input type="checkbox" name="store" value="{{store.id}}"></td>
+                    <td>{{store.id}}</td>
+                    <td>{{store.name}}</td>
+                    <td>{{store.city.name}}</td>
+                    <td><span ng-repeat="mission in store.missions">
+                        {{mission.descr}}<br>
+                    </span></td>
+                    <td><ul>
+                        <li><span class="link" ng-click="edit(store)">Редактировать</span></li>
+                        <li><span class="link" ng-click="delete(store)">Удалить</span></li>
+                    </ul></td>
+                </tr>
+            </table>
+            <span class="link" ng-click="create()">Создать</span>
+        </div>
+        <div id="block_form" ng-show="form">
+            <h2>{{titleForm}}</h2>
+            <form>
+                <ul>
+                    <li ng-show="edit">
+                        ID:<input ng-model="store.id" type="text"name="id" value="{{store.id}}" disabled>
+                        <input type="hidden" name="id" value="{{store.id}}">
+                    </li>
+                    <li>
+                        Название:<input ng-model="store.name" type="text"name="name" placeholder="Название" value="{{store.name}}">
+                    </li>
+                    <li>
+                        Город:
+                        <select name="city" ng-model="store.city.id">
+                            <option selected></option>
+                            <option ng-repeat="city in listCities" value="{{city.id}}">{{city.name}}</option>
+                        </select>
+                    </li>
+                    <li ng-show="edit"><input type="button" value="{{titleForm}}" ng-click="update(store)"></li>
+                    <li ng-hide="edit"><input type="button" value="{{titleForm}}" ng-click="add(store)"></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

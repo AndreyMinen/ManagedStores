@@ -1,10 +1,7 @@
 package ru.dronix.managedstores.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.dronix.managedstores.models.City;
 import ru.dronix.managedstores.models.Seller;
 import ru.dronix.managedstores.models.Store;
@@ -38,7 +35,7 @@ public class StoreController {
     }
 
 
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public void addStore(@RequestParam("name")String name,
                        @RequestParam("city_id")Long id){
         Store store=new Store();
@@ -48,7 +45,7 @@ public class StoreController {
         storeService.create(store);
     }
 
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
     public void update(@RequestParam("id")Long id,
                        @RequestParam(value = "name",required = false)String name,
                        @RequestParam(value = "city_id",required = false)Long city_id){
@@ -63,35 +60,36 @@ public class StoreController {
         storeService.update(store);
     }
 
-    @RequestMapping(value = "/delete")
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public void delete(@RequestParam("id")Long id){
         storeService.remove(storeService.getOne(id));
     }
 
-    @RequestMapping(value = "/filter/city")
-    public List<Store> findByCity(@RequestParam("id")Long id){
-        return storeService.findByCity_id(id);
-    }
+    @RequestMapping(value = "/filter",method = RequestMethod.GET)
+    public List<Store> filter(@RequestParam(value = "name",required = false)String name,
+                                           @RequestParam(value = "city_id",required = false)Long id){
 
-    @RequestMapping(value = "/filter/seller")
-    public List<Store> findBySeller(@RequestParam("name")String name){
-        List<Seller> sellers=sellerService.findByName(name);
-        List<Store> stores=new ArrayList<>();
-        sellers.forEach(seller -> stores.add(seller.getStore_id()));
+        final List<Store> stores=new ArrayList<>();
+        System.out.println(name);
+        if(name!=null && id==null){
+            List<Seller> sellers=sellerService.findByName(name);
+            sellers.forEach(item->stores.add(item.getStore_id()));
+        }
+        if(name==null && id!=null){
+            storeService.findByCityId(id).forEach(stores::add);
+        }
+        if(name==null && id==null){
+            storeService.findAll().forEach(stores::add);
+        }
+        if(name!=null && id!=null){
+            List<Seller> sellers=sellerService.findByName(name);
+            sellers.forEach(seller -> {
+                if (seller.getStore_id().getCity().getId()==id){
+                    stores.add(seller.getStore_id());
+                }
+            });
+        }
 
-        return stores;
-    }
-
-    @RequestMapping(value = "/filter/sellercity")
-    public List<Store> findByCityAndSeller(@RequestParam("name")String name,
-                                    @RequestParam("city_id")Long id){
-        List<Seller> sellers=sellerService.findByName(name);
-        List<Store> stores=new ArrayList<>();
-        sellers.forEach(seller -> {
-            if (seller.getStore_id().getCity().getId()==id){
-                stores.add(seller.getStore_id());
-            }
-        });
 
         return stores;
     }

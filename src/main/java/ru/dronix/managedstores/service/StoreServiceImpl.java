@@ -50,8 +50,8 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     @Transactional
-    public List<Store> findByCity_id(Long id) {
-        return storeDao.findByCity_id(id);
+    public List<Store> findByCityId(Long id) {
+        return storeDao.findByCityId(id);
     }
 
 }
