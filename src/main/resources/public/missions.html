@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/styles.css">
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/missions.js"></script>
+    <title>Управление городами</title>
+</head>
+<body ng-app="application">
+
+<div id="block_body" ng-controller="bodyCtrl">
+    <div id="block_link">
+        <ul>
+            <li><a href="store.html">Магазины</a></li>
+            <li><a href="city.html">Города</a></li>
+            <li><a href="seller.html">Сотрудники</a></li>
+            <li><span class="active">Задания</span></li>
+        </ul>
+    </div>
+    <div id="block_search">
+        <form>
+            Поиск: <input ng-model="textSearch" placeholder="Описание задания" type="text">
+        </form>
+    </div>
+    <div id="block_table">
+        <table border="1">
+            <tr>
+                <th><b>Выбор</b></th>
+                <th><b>ID</b></th>
+                <th><b>Описание</b></th>
+                <th><b>Магазин</b></th>
+                <th><b>город</b></th>
+                <th><b>Действия</b></th>
+            </tr>
+            <tr ng-repeat="mission in listMissions | filter: textSearch">
+                <td><input type="checkbox" name="mission" ng-model="selected"
+                           ng-checked="exist(mission)" ng-click="toggleSelection(mission)"></td>
+                <td>{{mission.id}}</td>
+                <td>{{mission.descr}}</td>
+                <td>{{mission.store_id.name}}</td>
+                <td>{{mission.store_id.city.name}}</td>
+                <td><ul>
+                    <li><span class="link" ng-click="edit(mission)">Редактировать</span></li>
+                </ul></td>
+            </tr>
+        </table>
+        <span class="link" ng-click="create()">Создать</span>
+        <span class="link" ng-click="delete()">Удалить</span>
+    </div>
+    <div id="block_form" ng-show="form">
+        <h2>{{titleForm}}</h2>
+        <form>
+            <ul>
+                <li ng-show="edit">
+                    ID:<input ng-model="mission.id" type="text"name="id" value="{{mission.id}}" disabled>
+                    <input type="hidden" name="id" value="{{mission.id}}">
+                </li>
+                <li>
+                    Название:<input ng-model="mission.descr" type="text"name="descr" placeholder="Описание задания"
+                                    value="{{mission.descr}}">
+                </li>
+                <li>
+                    Магазин:
+                    <select name="store" ng-model="mission.store_id.id">
+                        <option selected></option>
+                        <option ng-repeat="store in listStores" value="{{store.id}}">{{store.name}} г.{{store.city.name}}</option>
+                    </select>
+                </li>
+                <li ng-show="edit"><input type="button" value="{{titleForm}}" ng-click="update(mission)"></li>
+                <li ng-hide="edit"><input type="button" value="{{titleForm}}" ng-click="add(mission)"></li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

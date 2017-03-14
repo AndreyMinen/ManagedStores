@@ -1,10 +1,7 @@
 package ru.dronix.managedstores.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.dronix.managedstores.models.Seller;
 import ru.dronix.managedstores.service.SellerService;
 import ru.dronix.managedstores.service.StoreService;
@@ -30,7 +27,7 @@ public class SellerController {
         return sellerService.findAll();
     }
 
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
     public void addSeller(@RequestParam("name")String name,
                           @RequestParam("store_id")Long id){
 
@@ -41,7 +38,7 @@ public class SellerController {
         sellerService.create(seller);
     }
 
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
     public void update(@RequestParam("id")Long id,
                        @RequestParam(value = "name",required = false)String name,
                        @RequestParam(value = "store_id",required = false)Long store_id){
@@ -50,7 +47,7 @@ public class SellerController {
         if(name!=null){
             seller.setName(name);
         }if(store_id!=null){
-            seller.setStore_id(storeService.getOne(id));
+            seller.setStore_id(storeService.getOne(store_id));
         }
 
 
@@ -58,7 +55,7 @@ public class SellerController {
         sellerService.update(seller);
     }
 
-    @RequestMapping(value = "/delete")
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public void delete(@RequestParam("id")Long id){
 
         sellerService.remove(sellerService.getOne(id));

@@ -14,18 +14,17 @@
         <div id="block_link">
             <ul>
                 <li><span class="active">Магазины</span></li>
-                <li><a href="#">Города</a></li>
-                <li><a href="#">Сотрудники</a></li>
-                <li><a href="#">Задания</a></li>
+                <li><a href="city.html">Города</a></li>
+                <li><a href="seller.html">Сотрудники</a></li>
+                <li><a href="missions.html">Задания</a></li>
             </ul>
         </div>
-        <div id="block_serch">
+        <div id="block_search">
             <form>
                 Поиск: <input ng-model="seller.name" placeholder="Сотрудник" type="text" name="city">
                 <select ng-model="city" ng-options="city.name for city in listCities">
                     <option></option>
                 </select>
-                <input type="button" ng-click="search(seller)" value="Поиск">
             </form>
         </div>
         <div id="block_table">
@@ -39,7 +38,8 @@
                     <th><b>Действия</b></th>
                 </tr>
                 <tr ng-repeat="store in listStores | filter: city.name | filter: seller.name">
-                    <td><input type="checkbox" name="store" value="{{store.id}}"></td>
+                    <td><input type="checkbox" name="store" ng-model="selected"
+                               ng-checked="exist(store)" ng-click="toggleSelection(store)"></td>
                     <td>{{store.id}}</td>
                     <td>{{store.name}}</td>
                     <td>{{store.city.name}}</td>
@@ -48,11 +48,11 @@
                     </span></td>
                     <td><ul>
                         <li><span class="link" ng-click="edit(store)">Редактировать</span></li>
-                        <li><span class="link" ng-click="delete(store)">Удалить</span></li>
                     </ul></td>
                 </tr>
             </table>
             <span class="link" ng-click="create()">Создать</span>
+            <span class="link" ng-click="delete()">Удалить</span>
         </div>
         <div id="block_form" ng-show="form">
             <h2>{{titleForm}}</h2>

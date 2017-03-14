@@ -35,7 +35,7 @@ public class CityController {
         cityService.create(city);
     }
 
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
     public void update(@RequestParam("id") Long id,
                        @RequestParam("name") String name){
         City city=cityService.getOne(id);
@@ -44,7 +44,7 @@ public class CityController {
         cityService.update(city);
     }
 
-    @RequestMapping(value = "/delete")
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public void remove(@RequestParam("id") Long id){
         City city=cityService.getOne(id);
         cityService.remove(city);

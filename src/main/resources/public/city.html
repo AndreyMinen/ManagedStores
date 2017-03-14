@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/styles.css">
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/city.js"></script>
+    <title>Управление городами</title>
+</head>
+<body ng-app="application">
+
+<div id="block_body" ng-controller="bodyCtrl">
+    <div id="block_link">
+        <ul>
+            <li><a href="store.html">Магазины</a></li>
+            <li><span class="active">Города</span></li>
+            <li><a href="seller.html">Сотрудники</a></li>
+            <li><a href="missions.html">Задания</a></li>
+        </ul>
+    </div>
+    <div id="block_search">
+        <form>
+            Поиск: <input ng-model="searchText" placeholder="Город" type="text">
+        </form>
+    </div>
+    <div id="block_table">
+        <table border="1">
+            <tr>
+                <th><b>Выбор</b></th>
+                <th><b>ID</b></th>
+                <th><b>Название</b></th>
+                <th><b>Действия</b></th>
+            </tr>
+            <tr ng-repeat="city in listCities | filter: searchText">
+                <td><input type="checkbox" name="city" ng-model="selected"
+                           ng-checked="exist(city)" ng-click="toggleSelection(city)"></td>
+                <td>{{city.id}}</td>
+                <td>{{city.name}}</td>
+               <td><ul>
+                    <li><span class="link" ng-click="edit(city)">Редактировать</span></li>
+                </ul></td>
+            </tr>
+        </table>
+        <span class="link" ng-click="create()">Создать</span>
+        <span class="link" ng-click="delete()">Удалить</span>
+    </div>
+    <div id="block_form" ng-show="form">
+        <h2>{{titleForm}}</h2>
+        <form>
+            <ul>
+                <li ng-show="edit">
+                    ID:<input ng-model="city.id" type="text"name="id" value="{{city.id}}" disabled>
+                    <input type="hidden" name="id" value="{{city.id}}">
+                </li>
+                <li>
+                    Название:<input ng-model="city.name" type="text"name="name" placeholder="Название" value="{{city.name}}">
+                </li>
+                <li ng-show="edit"><input type="button" value="{{titleForm}}" ng-click="update(city)"></li>
+                <li ng-hide="edit"><input type="button" value="{{titleForm}}" ng-click="add(city)"></li>
+            </ul>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -28,7 +28,7 @@ public class MissionController {
         return missionService.findAll();
     }
 
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
     public void addMission(@RequestParam("descr") String descr,
                            @RequestParam("store") Long id){
         Mission mission=new Mission();
@@ -39,7 +39,7 @@ public class MissionController {
         missionService.create(mission);
     }
 
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
     public void update(@RequestParam("id")Long id,
                        @RequestParam(value = "descr", required = false)String descr,
                        @RequestParam(value = "store_id",required = false)Long store_id){
@@ -54,7 +54,7 @@ public class MissionController {
         missionService.update(mission);
     }
 
-    @RequestMapping(value = "/delete")
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
     public void delete(@RequestParam("id")Long id){
         Mission mission=missionService.getOne(id);
         missionService.remove(mission);
